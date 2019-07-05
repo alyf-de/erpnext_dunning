@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include dunning *.css
+recursive-include dunning *.csv
+recursive-include dunning *.html
+recursive-include dunning *.ico
+recursive-include dunning *.js
+recursive-include dunning *.json
+recursive-include dunning *.md
+recursive-include dunning *.png
+recursive-include dunning *.py
+recursive-include dunning *.svg
+recursive-include dunning *.txt
+recursive-exclude dunning *.pyc
