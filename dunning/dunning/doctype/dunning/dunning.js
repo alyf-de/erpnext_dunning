@@ -27,6 +27,9 @@ frappe.ui.form.on('Dunning', {
 	},
 	dunning_fee: function(frm){
 		frm.trigger("calculate_sum");
+	},
+	calculate_interest: function(frm) {
+		const z = (frm.get_field("interest_rate").get_value() * frm.get_field("outstanding_amount").get_value() * frm.get_field("overdue_days").get_value()) / (100 * 365);
+		frm.set_value("interest_amount", z);
 	}	
-
-});			
+});
