@@ -1,0 +1,5 @@
+DocType: Dunning,Dunning,Mahnung
+DocType: Dunning,Interest Rate,Zinssatz
+DocType: Dunning,Interest Amount,Zinsbetrag
+DocType: Dunning,Sum,Summe
+DocType: Dunning,Dunning Fee,Mahngebühr
