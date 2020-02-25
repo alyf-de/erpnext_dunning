@@ -2,7 +2,19 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Dunning', {
+	setup: function (frm) {
+		frm.set_query('sales_invoice', () => {
+			return {
+				"filters": {
+					"docstatus": 1,
+					"company": frm.doc.company,
+					"outstanding_amount": [">", 0]
+				},
+			};
+		});
+	},
 	refresh: function (frm) {
+		frm.set_df_property("company", "read_only", frm.doc.__islocal ? 0 : 1);
 		if (frm.is_new()) {
 			frm.trigger("calculate_overdue_days");
 			frm.set_value("posting_date", frappe.datetime.nowdate());
