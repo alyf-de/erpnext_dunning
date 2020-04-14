@@ -79,13 +79,11 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-#	}
-# }
+doc_events = {
+	"Payment Entry": {
+		"on_submit": "dunning.dunning.doctype.dunning.dunning.resolve_dunnings_for_payment_entry"
+	}
+}
 
 # Scheduled Tasks
 # ---------------
