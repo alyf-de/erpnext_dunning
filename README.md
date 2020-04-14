@@ -4,7 +4,8 @@ Dunn overdue invoices in ERPNext. Optionally you can charge a fixed fee and / or
 
 The DocType looks like this:
 
-![](docs/assets/dunning.png)
+![](docs/assets/dunning_form.png)
+![](docs/assets/dunning_list.png)
 
 The corresponding PDF could look like this (not included in this app): 
 
