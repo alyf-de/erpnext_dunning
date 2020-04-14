@@ -5,24 +5,26 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "company",
   "naming_series",
   "sales_invoice",
-  "outstanding_amount",
-  "column_break_3",
-  "posting_date",
   "due_date",
   "overdue_days",
+  "outstanding_amount",
+  "customer",
+  "column_break_3",
+  "company",
+  "posting_date",
+  "posting_time",
+  "set_posting_time",
   "section_break_6",
   "dunning_type",
-  "interest_amount",
-  "column_break_8",
+  "section_break_13",
   "interest_rate",
+  "column_break_8",
+  "interest_amount",
   "dunning_fee",
-  "section_break_12",
   "sum",
-  "column_break_17",
-  "resolution_status",
+  "status",
   "printing_setting_section",
   "letter_head",
   "column_break_22",
@@ -50,18 +52,27 @@
    "fieldtype": "Column Break"
   },
   {
+   "bold": 1,
+   "default": "Today",
    "fieldname": "posting_date",
    "fieldtype": "Date",
-   "label": "Posting Date"
+   "label": "Date",
+   "no_copy": 1,
+   "read_only": 1,
+   "reqd": 1,
+   "search_index": 1
   },
   {
+   "depends_on": "eval:doc.sales_invoice",
    "fetch_from": "sales_invoice.due_date",
    "fieldname": "due_date",
    "fieldtype": "Date",
-   "label": "Due Date",
+   "label": "Payment Due Date",
    "read_only": 1
   },
   {
+   "default": "0",
+   "depends_on": "eval:doc.sales_invoice",
    "fieldname": "overdue_days",
    "fieldtype": "Int",
    "label": "Overdue Days",
@@ -88,7 +99,8 @@
    "fetch_from": "dunning_type.interest_rate",
    "fieldname": "interest_rate",
    "fieldtype": "Float",
-   "label": "Interest Rate"
+   "label": "Annual Interest Rate",
+   "precision": "2"
   },
   {
    "default": "0",
@@ -97,10 +109,6 @@
    "fieldtype": "Currency",
    "label": "Dunning Fee",
    "precision": "2"
-  },
-  {
-   "fieldname": "section_break_12",
-   "fieldtype": "Section Break"
   },
   {
    "default": "0",
@@ -123,8 +131,10 @@
   {
    "fieldname": "company",
    "fieldtype": "Link",
+   "in_standard_filter": 1,
    "label": "Company",
    "options": "Company",
+   "print_hide": 1,
    "reqd": 1
   },
   {
@@ -132,13 +142,6 @@
    "fieldtype": "Link",
    "label": "Dunning Type",
    "options": "Dunning Type"
-  },
-  {
-   "default": "Unresolved",
-   "fieldname": "resolution_status",
-   "fieldtype": "Select",
-   "label": "Resolution Status",
-   "options": "Resolved\nUnresolved"
   },
   {
    "collapsible": 1,
@@ -153,11 +156,16 @@
    "options": "Letter Head"
   },
   {
-   "default": "PR-.MM.-.YY.-",
+   "bold": 1,
+   "default": "ACC-PR-.YYYY.-",
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "Series",
-   "options": "PR-.MM.-.YY.-"
+   "no_copy": 1,
+   "options": "ACC-PR-.YYYY.-",
+   "print_hide": 1,
+   "reqd": 1,
+   "set_only_once": 1
   },
   {
    "fetch_from": "sales_invoice.currency",
@@ -168,16 +176,52 @@
    "read_only": 1
   },
   {
-   "fieldname": "column_break_17",
+   "fieldname": "column_break_22",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_22",
-   "fieldtype": "Column Break"
+   "allow_on_submit": 1,
+   "default": "Unresolved",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Status",
+   "no_copy": 1,
+   "options": "\nResolved\nUnresolved",
+   "read_only": 1
+  },
+  {
+   "fieldname": "posting_time",
+   "fieldtype": "Time",
+   "label": "Posting Time",
+   "no_copy": 1,
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.docstatus==0;",
+   "fieldname": "set_posting_time",
+   "fieldtype": "Check",
+   "label": "Edit Posting Date and Time",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "section_break_13",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "sales_invoice.customer",
+   "fieldname": "customer",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Customer",
+   "read_only": 1
   }
  ],
  "is_submittable": 1,
- "modified": "2019-12-05 06:25:59.853328",
+ "modified": "2020-04-14 13:41:18.145028",
  "modified_by": "Administrator",
  "module": "Dunning",
  "name": "Dunning",
@@ -227,5 +271,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "ASC",
+ "title_field": "sales_invoice",
  "track_changes": 1
 }
