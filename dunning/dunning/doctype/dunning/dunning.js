@@ -20,6 +20,12 @@ frappe.ui.form.on('Dunning', {
 
 		frm.trigger('set_posting_date_and_time_read_only');
 		frm.trigger('set_interest_rate_and_dunning_fee_read_only');
+
+		if (frm.doc.docstatus == 1 && frm.doc.status == 'Unresolved') {
+			frm.add_custom_button(__('Resolve'), () => {
+				frm.set_value('status', 'Resolved');
+			});
+		}
 	},
 
 	set_posting_time: function (frm) {
