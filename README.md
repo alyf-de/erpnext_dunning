@@ -1,3 +1,5 @@
+> **Dunning will be a part of ERPNext v13. This repository is no longer maintained.**
+
 ## Dunning / Mahnung
 
 Dunn overdue invoices in ERPNext. Optionally you can charge a fixed fee and / or interest.
